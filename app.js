@@ -3,11 +3,12 @@
   "use strict";
 
   var preloader = document.getElementById("preloader");
+  var nav = document.getElementById("nav");
 
   // Graceful fallback: if the animation lib failed to load, just show the page.
   if (!window.Motion) {
     if (preloader) preloader.style.display = "none";
-    document.getElementById("nav").style.transform = "none";
+    if (nav) nav.style.transform = "none";
     return;
   }
 
@@ -19,14 +20,8 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- preloader ---------- */
-  var preName = document.getElementById("preName");
-  var letters = preName.textContent.split("");
-  preName.innerHTML = letters
-    .map(function (ch) { return '<span>' + (ch === " " ? "&nbsp;" : ch) + "</span>"; })
-    .join("");
-
   function heroIntro() {
-    animate("#nav", { y: ["-100%", "0%"] }, { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
+    if (nav) animate("#nav", { y: ["-100%", "0%"] }, { duration: 0.8, easing: [0.22, 1, 0.36, 1] });
     animate(
       "[data-hero]",
       { opacity: [0, 1], y: [36, 0] },
@@ -34,17 +29,27 @@
     );
   }
 
-  if (reduceMotion) {
-    preloader.style.display = "none";
-    heroIntro();
+  if (preloader) {
+    var preName = document.getElementById("preName");
+    var letters = preName.textContent.split("");
+    preName.innerHTML = letters
+      .map(function (ch) { return '<span>' + (ch === " " ? "&nbsp;" : ch) + "</span>"; })
+      .join("");
+
+    if (reduceMotion) {
+      preloader.style.display = "none";
+      heroIntro();
+    } else {
+      animate("#preloader .pre-name span", { opacity: [0, 1], y: [24, 0] },
+        { duration: 0.5, delay: stagger(0.035), easing: "ease-out" });
+      animate("#preloader .pre-sub", { opacity: [0, 1] }, { duration: 0.6, delay: 0.7 });
+      animate("#preloader", { y: ["0%", "-100%"] },
+        { duration: 0.9, delay: 1.5, easing: [0.76, 0, 0.24, 1],
+          onComplete: function () { preloader.style.display = "none"; } });
+      setTimeout(heroIntro, 1600);
+    }
   } else {
-    animate("#preloader .pre-name span", { opacity: [0, 1], y: [24, 0] },
-      { duration: 0.5, delay: stagger(0.035), easing: "ease-out" });
-    animate("#preloader .pre-sub", { opacity: [0, 1] }, { duration: 0.6, delay: 0.7 });
-    animate("#preloader", { y: ["0%", "-100%"] },
-      { duration: 0.9, delay: 1.5, easing: [0.76, 0, 0.24, 1],
-        onComplete: function () { preloader.style.display = "none"; } });
-    setTimeout(heroIntro, 1600);
+    heroIntro();
   }
 
   /* ---------- scroll reveals ---------- */
@@ -78,11 +83,13 @@
   scroll(function (info) { bar.style.transform = "scaleX(" + info.y.progress + ")"; });
 
   /* ---------- parallax orbs ---------- */
-  if (!reduceMotion) {
+  var orbA = document.querySelector(".orb-a");
+  var orbB = document.querySelector(".orb-b");
+  if (!reduceMotion && (orbA || orbB)) {
     scroll(function (info) {
       var p = info.y.progress;
-      document.querySelector(".orb-a").style.transform = "translateY(" + p * 220 + "px)";
-      document.querySelector(".orb-b").style.transform = "translateY(" + -p * 160 + "px)";
+      if (orbA) orbA.style.transform = "translateY(" + p * 220 + "px)";
+      if (orbB) orbB.style.transform = "translateY(" + -p * 160 + "px)";
     });
   }
 
@@ -126,9 +133,10 @@
   }
 
   /* ---------- nav shadow on scroll ---------- */
-  var nav = document.getElementById("nav");
-  scroll(function (info) {
-    nav.style.boxShadow = info.y.progress > 0.02
-      ? "0 8px 30px rgba(0,0,0,0.45)" : "none";
-  });
+  if (nav) {
+    scroll(function (info) {
+      nav.style.boxShadow = info.y.progress > 0.02
+        ? "0 8px 30px rgba(0,0,0,0.45)" : "none";
+    });
+  }
 })();
