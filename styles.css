@@ -163,6 +163,24 @@ a { color: inherit; text-decoration: none; }
 .case-list li { color: var(--ink); font-size: 0.93rem; padding-left: 1.4rem; position: relative; }
 .case-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
 
+/* ---------- clients ---------- */
+.clients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 3rem; }
+.client-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 2.2rem 1.8rem; display: flex; flex-direction: column; gap: 0.5rem;
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  position: relative; overflow: hidden;
+}
+.client-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--violet));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.45s ease;
+}
+.client-card:hover { transform: translateY(-6px); border-color: rgba(255,107,44,0.5); }
+.client-card:hover::before { transform: scaleX(1); }
+.client-name { font-family: "Fraunces", serif; font-size: 1.5rem; font-weight: 600; }
+.client-tag { color: var(--muted); font-size: 0.9rem; }
+
 /* ---------- timeline ---------- */
 .timeline { margin-top: 3rem; display: grid; gap: 0; position: relative; }
 .timeline::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--accent), var(--violet), transparent); }
