@@ -392,3 +392,85 @@ a { color: inherit; text-decoration: none; }
   .wall-grid { grid-template-columns: 1fr; }
   .wall-card:nth-child(3n+2) { margin-top: 0; }
 }
+
+/* ---------- gen-z color + motion pass (no locked palette) ---------- */
+:root { --teal: #2dd4bf; --yellow: #ffd21f; --pink: #ff5da2; --lime: #b8e62e; --red: #ff3b30; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--r, 0deg)); }
+}
+@keyframes wiggle { 0%, 100% { rotate: -8deg; } 50% { rotate: -3deg; } }
+@keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+/* hand-drawn red ellipse, purva-style */
+.circle-scribble {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 90' preserveAspectRatio='none'%3E%3Cpath d='M100 6 C 152 4, 192 18, 194 44 C 196 72, 138 86, 94 84 C 48 82, 8 70, 6 44 C 4 20, 54 8, 106 10' fill='none' stroke='%23ff3b30' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  padding: 0.12em 0.42em; margin: -0.12em -0.42em;
+}
+
+/* floating doodles */
+.doodle { position: absolute; z-index: 1; pointer-events: none; animation: floaty 5s ease-in-out infinite; }
+.d-bolt { top: 16%; right: 7%; width: 44px; --r: 14deg; }
+.d-star { top: 62%; left: 5%; width: 56px; --r: -10deg; animation-delay: 1.4s; }
+.d-squig { bottom: 12%; right: 12%; width: 112px; --r: 6deg; animation-delay: 2.2s; }
+.hero { position: relative; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(620px circle at 82% 18%, rgba(255,210,31,0.08), transparent 60%),
+    radial-gradient(520px circle at 8% 82%, rgba(255,93,162,0.07), transparent 60%);
+}
+.sticker-float {
+  position: absolute; top: 24%; left: 4%; z-index: 2;
+  animation: floaty 6s ease-in-out infinite; cursor: default;
+}
+.sticker-float:hover { animation: wiggle 0.6s ease-in-out infinite; }
+.sticker-teal { background: var(--teal); }
+.sticker-pink { background: var(--pink); }
+
+/* multicolor tapes on the proof wall */
+.wall-card:nth-child(1)::before { background: rgba(255,107,44,0.9); transform: translateX(-50%) rotate(-4deg); }
+.wall-card:nth-child(2)::before { background: rgba(45,212,191,0.9); transform: translateX(-50%) rotate(5deg); }
+.wall-card:nth-child(3)::before { background: rgba(255,210,31,0.9); transform: translateX(-50%) rotate(-6deg); }
+.wall-card:nth-child(4)::before { background: rgba(255,93,162,0.9); transform: translateX(-50%) rotate(3deg); }
+.wall-card:nth-child(5)::before { background: rgba(139,124,255,0.9); transform: translateX(-50%) rotate(-5deg); }
+.wall-card:nth-child(6)::before { background: rgba(184,230,46,0.9); transform: translateX(-50%) rotate(4deg); }
+
+/* services: every card gets its own color */
+.svc { --sc: var(--accent); }
+.svc:nth-child(1) { --sc: var(--teal); }
+.svc:nth-child(2) { --sc: var(--yellow); }
+.svc:nth-child(3) { --sc: var(--pink); }
+.svc:nth-child(4) { --sc: var(--violet); }
+.svc:nth-child(5) { --sc: var(--lime); }
+.svc:nth-child(6) { --sc: var(--accent); }
+.svc .svc-n { color: var(--sc); }
+.svc:hover { border-color: var(--sc); box-shadow: 0 14px 40px -18px var(--sc); }
+.svc::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--sc) 16%, transparent), transparent 60%); }
+
+/* journey timeline: colorful dots */
+.t-item:nth-child(1)::before { border-color: var(--teal); }
+.t-item:nth-child(2)::before { border-color: var(--yellow); }
+.t-item:nth-child(3)::before { border-color: var(--pink); }
+.t-item:nth-child(4)::before { border-color: var(--violet); }
+
+/* zigzag divider */
+.zigzag {
+  height: 26px; position: relative; z-index: 1; opacity: 0.9;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='26' viewBox='0 0 96 26'%3E%3Cdefs%3E%3ClinearGradient id='z' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23ff6b2c'/%3E%3Cstop offset='0.35' stop-color='%23ffd21f'/%3E%3Cstop offset='0.65' stop-color='%232dd4bf'/%3E%3Cstop offset='1' stop-color='%238b7cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 20 L16 6 L32 20 L48 6 L64 20 L80 6 L96 20' fill='none' stroke='url(%23z)' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E") repeat-x center / auto 100%;
+}
+
+/* second marquee: colorful, reverse direction */
+.marquee-alt { background: rgba(255,210,31,0.05); }
+.marquee-track.rev { animation: marquee-rev 26s linear infinite; }
+.marquee-alt .c1 { color: var(--teal); font-style: normal; font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+.marquee-alt .c2 { color: var(--yellow); font-style: normal; font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+.marquee-alt .c3 { color: var(--pink); font-style: normal; font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+.marquee-alt .c4 { color: var(--lime); font-style: normal; font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+.marquee-alt .c5 { color: var(--violet); font-style: normal; font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+.marquee-alt .c6 { color: var(--accent); font-style: normal; font-family: "Space Grotesk", sans-serif; font-weight: 600; }
+
+@media (max-width: 860px) {
+  .doodle, .sticker-float { display: none; }
+}
