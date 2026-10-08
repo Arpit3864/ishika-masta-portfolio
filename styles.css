@@ -474,3 +474,211 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 860px) {
   .doodle, .sticker-float { display: none; }
 }
+
+/* ---------- break the fixed orange-blue: every section owns a color ---------- */
+:root { --accent: #ff5da2; }
+.hero { --accent: var(--yellow); }
+#proof { --accent: var(--pink); }
+#numbers { --accent: var(--teal); }
+#work { --accent: var(--lime); }
+#clients { --accent: var(--violet); }
+#journey { --accent: #ff6b2c; }
+#contact { --accent: var(--yellow); }
+#contact .h2 em { color: var(--accent); }
+
+/* atmosphere: no more orange/blue wash */
+.orb-a { background: radial-gradient(circle, rgba(255,210,31,0.5), transparent 70%); }
+.orb-b { background: radial-gradient(circle, rgba(255,93,162,0.38), transparent 70%); }
+.scroll-progress span { background: linear-gradient(90deg, #ff6b2c, #ffd21f, #2dd4bf, #8b7cff, #ff5da2); }
+
+/* first marquee: multicolor separators */
+.marquee-track i:nth-of-type(4n+1) { color: var(--pink); }
+.marquee-track i:nth-of-type(4n+2) { color: var(--teal); }
+.marquee-track i:nth-of-type(4n+3) { color: var(--yellow); }
+.marquee-track i:nth-of-type(4n) { color: var(--lime); }
+
+/* accent-driven hovers + tints (no hardcoded orange) */
+.wall-tag {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.case-body { background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 9%, transparent), transparent 55%), var(--card); }
+.proof-card:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.case-card:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.t-card:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+
+/* ================= v7: full-color zine — no fixed color combo ================= */
+:root {
+  --bg: #f7f1e3;
+  --bg2: #fffdf6;
+  --ink: #1b1409;
+  --muted: #6f6353;
+  --card: #fffdf8;
+  --line: rgba(27, 20, 9, 0.16);
+  --accent: #be185d;
+  --pink-deep: #be185d;
+  --teal-deep: #0f766e;
+  --gold-deep: #c77e0a;
+  --lime-deep: #4d7c0f;
+  --violet-deep: #6d28d9;
+  --orange-deep: #c2410c;
+  --blue-deep: #2563eb;
+}
+
+/* every section owns a different color — nothing is "the brand color" */
+.hero { --accent: var(--gold-deep); }
+#proof { --accent: var(--pink-deep); }
+#numbers { --accent: var(--yellow); }
+#work { --accent: var(--lime-deep); }
+#clients { --accent: var(--violet-deep); }
+#journey { --accent: var(--orange-deep); }
+#services { --accent: var(--teal-deep); }
+#contact { --accent: var(--ink); }
+
+::selection { background: var(--yellow); color: var(--ink); }
+
+/* atmosphere: pastel washes on paper */
+.orb-a { background: radial-gradient(circle, rgba(255,210,31,0.45), transparent 70%); }
+.orb-b { background: radial-gradient(circle, rgba(255,93,162,0.30), transparent 70%); }
+
+/* preloader + nav go paper */
+.preloader { background: var(--bg); }
+.pre-name { color: var(--ink); }
+.nav { background: rgba(247,241,227,0.86); }
+.brand .dot { color: var(--pink-deep); }
+.nav-links a { color: var(--muted); }
+.nav-links a:hover { color: var(--ink); }
+
+/* kickers become sticker pills */
+.kicker {
+  display: inline-block;
+  background: var(--accent); color: #fff;
+  font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em;
+  padding: 0.5rem 1.15rem; border-radius: 999px;
+  border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+  rotate: -2deg; margin-bottom: 1.2rem;
+}
+#numbers .kicker { color: var(--ink); }
+#contact .kicker { background: var(--ink); color: #fff7ea; box-shadow: 3px 3px 0 rgba(27,20,9,0.3); }
+
+/* zine buttons: hard offset shadows */
+.btn {
+  background: var(--accent); color: #fff;
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translate(-2px,-2px) rotate(-1deg); box-shadow: 7px 7px 0 var(--ink); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); box-shadow: 7px 7px 0 var(--ink); }
+.hero .btn:not(.btn-ghost) { color: var(--ink); }
+#contact .btn:not(.btn-ghost) { color: #fff7ea; }
+
+/* hero: multicolor wash + gradient headline word */
+.hero::before {
+  background:
+    radial-gradient(620px circle at 82% 18%, rgba(255,210,31,0.20), transparent 60%),
+    radial-gradient(520px circle at 8% 82%, rgba(255,93,162,0.16), transparent 60%),
+    radial-gradient(500px circle at 50% 110%, rgba(45,212,191,0.14), transparent 60%);
+}
+.grad {
+  background: linear-gradient(92deg, #ec4899, #8b5cf6 48%, #2563eb);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-tags span {
+  background: #fff; border: 1.5px solid rgba(27,20,9,0.85); color: var(--ink);
+}
+.hero-tags span:nth-child(4n+1):hover { background: #ffd21f; border-color: var(--ink); color: var(--ink); transform: translateY(-2px) rotate(-2deg); }
+.hero-tags span:nth-child(4n+2):hover { background: #ff5da2; border-color: var(--ink); color: #fff; transform: translateY(-2px) rotate(2deg); }
+.hero-tags span:nth-child(4n+3):hover { background: #2dd4bf; border-color: var(--ink); color: var(--ink); transform: translateY(-2px) rotate(-2deg); }
+.hero-tags span:nth-child(4n):hover { background: #8b5cf6; border-color: var(--ink); color: #fff; transform: translateY(-2px) rotate(2deg); }
+.scroll-hint { border-color: rgba(27,20,9,0.4); }
+
+/* marquees: dark sticker strips, tilted */
+.marquee {
+  background: var(--ink); border: none; color: #f7f1e3;
+  transform: rotate(-1.3deg) scale(1.03); margin: 1.5rem 0;
+  box-shadow: 0 10px 30px rgba(27,20,9,0.25);
+}
+.marquee-track span { color: #f7f1e3; }
+.marquee-track i:nth-of-type(4n+1) { color: #ff5da2; }
+.marquee-track i:nth-of-type(4n+2) { color: #2dd4bf; }
+.marquee-track i:nth-of-type(4n+3) { color: #ffd21f; }
+.marquee-track i:nth-of-type(4n) { color: #a3e635; }
+.marquee-alt {
+  background: #fff; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  transform: rotate(1deg) scale(1.03);
+}
+.marquee-alt .c1 { color: var(--teal-deep); }
+.marquee-alt .c2 { color: var(--gold-deep); }
+.marquee-alt .c3 { color: var(--pink-deep); }
+.marquee-alt .c4 { color: var(--lime-deep); }
+.marquee-alt .c5 { color: var(--violet-deep); }
+.marquee-alt .c6 { color: var(--orange-deep); }
+
+.zigzag.flip { transform: scaleY(-1); }
+
+/* section color bands */
+#proof { background: #fff3c9; }
+#numbers { background: var(--ink); color: #f7f1e3; }
+#numbers .dash-title { color: #f7f1e3; }
+#numbers .dash-title em { color: var(--yellow); }
+#numbers .dash-cell { border-color: rgba(247,241,227,0.2); }
+#numbers .dash-cell p, #numbers .dash-note { color: #c9bda6; }
+#numbers .dash-cell:nth-child(1) .dash-num { color: #ffd21f; }
+#numbers .dash-cell:nth-child(2) .dash-num { color: #ff5da2; }
+#numbers .dash-cell:nth-child(3) .dash-num { color: #2dd4bf; }
+#numbers .dash-cell:nth-child(4) .dash-num { color: #a3e635; }
+#clients { background: #ffe9f2; }
+#services { background: #e7f8ef; }
+#contact { background: linear-gradient(115deg, #ffe45c 0%, #ffb35c 38%, #ff7ab8 72%, #c084fc 100%); }
+#contact .lede, #contact .loc { color: #3d2c12; }
+
+/* cards: white paper, ink borders, hard-shadow hovers */
+.wall-card, .svc, .client-card, .t-card, .case-card, .case-body, .res-card, .proof-card, .proof-fig {
+  background: var(--card);
+  border: 1.5px solid rgba(27,20,9,0.9);
+}
+.wall-card:hover { border-color: var(--ink); box-shadow: 8px 8px 0 rgba(27,20,9,0.9); translate: -3px -3px; }
+.svc:hover { border-color: var(--ink); box-shadow: 8px 8px 0 rgba(27,20,9,0.9); transform: translate(-3px,-3px); }
+.client-card:hover { border-color: var(--ink); box-shadow: 8px 8px 0 rgba(27,20,9,0.9); transform: translate(-3px,-3px); }
+.t-card:hover { border-color: var(--ink); box-shadow: 6px 6px 0 rgba(27,20,9,0.9); transform: translate(-3px,-3px); }
+.case-card:hover { border-color: var(--ink); box-shadow: 10px 10px 0 rgba(27,20,9,0.9); transform: translate(-4px,-4px); }
+.res-card:hover { border-color: var(--ink); box-shadow: 6px 6px 0 rgba(27,20,9,0.9); transform: translate(-2px,-2px); }
+.proof-card:hover { border-color: var(--ink); }
+.case-body:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 rgba(27,20,9,0.9); }
+
+/* services: deep readable per-card colors */
+.svc:nth-child(1) { --sc: var(--teal-deep); }
+.svc:nth-child(2) { --sc: var(--gold-deep); }
+.svc:nth-child(3) { --sc: var(--pink-deep); }
+.svc:nth-child(4) { --sc: var(--violet-deep); }
+.svc:nth-child(5) { --sc: var(--lime-deep); }
+.svc:nth-child(6) { --sc: var(--orange-deep); }
+
+/* journey: rainbow timeline rail */
+.timeline::before { background: linear-gradient(#ff5da2, #ffd21f, #2dd4bf, #8b5cf6, transparent); }
+
+/* tools: multicolor hover pills */
+.tools span { background: #fff; border: 1.5px solid rgba(27,20,9,0.85); color: var(--ink); }
+.tools span:nth-child(4n+1):hover { background: #ffd21f; color: var(--ink); border-color: var(--ink); border-style: solid; transform: translateY(-2px) rotate(-2deg); }
+.tools span:nth-child(4n+2):hover { background: #ff5da2; color: #fff; border-color: var(--ink); border-style: solid; transform: translateY(-2px) rotate(2deg); }
+.tools span:nth-child(4n+3):hover { background: #2dd4bf; color: var(--ink); border-color: var(--ink); border-style: solid; transform: translateY(-2px) rotate(-2deg); }
+.tools span:nth-child(4n):hover { background: #8b5cf6; color: #fff; border-color: var(--ink); border-style: solid; transform: translateY(-2px) rotate(2deg); }
+
+/* stickers go handwritten */
+.sticker {
+  font-family: "Caveat", cursive; font-size: 1.4rem; font-weight: 700;
+  text-transform: none; letter-spacing: 0.01em;
+  color: var(--ink); border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.sticker-float { background: var(--yellow); }
+.wall-head .sticker { background: #ff5da2; color: #fff; }
+
+/* case pages inherit the paper look */
+.back-link:hover { color: var(--pink-deep); }
+.case-link { color: var(--pink-deep); }
+.t-note { color: var(--orange-deep); border-color: rgba(194,65,12,0.5); }
+.did-list li::before { color: var(--pink-deep); }
+.case-list li::before { color: var(--accent); }
