@@ -345,3 +345,50 @@ a { color: inherit; text-decoration: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- creative pass: proof wall + playful accents ---------- */
+.u-scribble {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 22 3, 42 10, 62 6 S 102 4, 118 7' fill='none' stroke='%23ff6b2c' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E") bottom / 100% 0.32em no-repeat;
+  padding-bottom: 0.1em;
+}
+.sticker {
+  display: inline-block; background: var(--accent); color: #0b0b10;
+  font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.5rem 1.1rem; border-radius: 999px; rotate: -6deg; white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(255,107,44,0.35);
+}
+.wall-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.wall-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 3rem; align-items: start; }
+.wall-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  overflow: hidden; position: relative;
+  transition: border-color 0.35s ease, translate 0.35s ease;
+}
+.wall-card:nth-child(3n+1) { rotate: -1.4deg; }
+.wall-card:nth-child(3n+2) { rotate: 1.1deg; margin-top: 1.4rem; }
+.wall-card:nth-child(3n) { rotate: -0.7deg; }
+.wall-card:hover { border-color: rgba(255,107,44,0.6); translate: 0 -6px; }
+.wall-card::before {
+  content: ""; position: absolute; top: 12px; left: 50%; width: 92px; height: 26px;
+  background: rgba(255,107,44,0.85); z-index: 2;
+  transform: translateX(-50%) rotate(-4deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  clip-path: polygon(2% 0, 98% 4%, 100% 96%, 0 100%);
+}
+.wall-card:nth-child(even)::before { background: rgba(139,124,255,0.85); transform: translateX(-50%) rotate(5deg); }
+.wall-thumb { aspect-ratio: 16/10; overflow: hidden; border-bottom: 1px solid var(--line); }
+.wall-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1); }
+.wall-card:hover .wall-thumb img { transform: scale(1.05); }
+.wall-meta { padding: 1.3rem 1.5rem 1.5rem; }
+.wall-tag {
+  display: inline-block; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid rgba(255,107,44,0.45); border-radius: 999px;
+  padding: 0.28rem 0.85rem; margin-bottom: 0.8rem; rotate: -2deg; background: rgba(255,107,44,0.06);
+}
+.wall-num { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(2rem, 3.4vw, 2.9rem); line-height: 1; }
+.wall-num i { font-style: normal; color: var(--accent); }
+.wall-meta p { color: var(--muted); margin-top: 0.55rem; font-size: 0.94rem; line-height: 1.6; }
+@media (max-width: 860px) {
+  .wall-grid { grid-template-columns: 1fr; }
+  .wall-card:nth-child(3n+2) { margin-top: 0; }
+}
