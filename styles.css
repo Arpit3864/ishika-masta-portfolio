@@ -673,7 +673,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink); border: 2px solid var(--ink);
   box-shadow: 3px 3px 0 var(--ink);
 }
-.sticker-float { background: var(--yellow); }
+.sticker-float { background: var(--yellow); top: 21.5%; left: 3%; }
 .wall-head .sticker { background: #ff5da2; color: #fff; }
 
 /* case pages inherit the paper look */
